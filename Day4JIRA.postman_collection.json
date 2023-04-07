@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "292a57b4-9089-42f2-b99c-fc8f21e78085",
+		"name": "Day4JIRA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26537322"
+	},
+	"item": [
+		{
+			"name": "CreateIssue",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"resp = pm.response.json();\r",
+							"pm.collectionVariables.set(\"jirakey\", resp.Key);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fields\": {\r\n        \"project\": {\r\n            \"key\": \"RS\"\r\n        },\r\n        \"summary\": \"create issue(Bug)in JIRA project\",\r\n        \"description\": \"First Bug creation using my own creds\",\r\n        \"issuetype\": {\r\n            \"name\": \"Bug\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apitestleafmarch23.atlassian.net/rest/api/2/issue/",
+					"protocol": "https",
+					"host": [
+						"apitestleafmarch23",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateSubTask",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"resp = pm.response.json();\r",
+							"pm.collectionVariables.set(\"jirakey\", resp.Key);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fields\": {\r\n        \"project\": {\r\n            \"key\": \"RS\"\r\n        },\r\n        \"summary\": \"create Task in JIRA project\",\r\n        \"description\": \"Calc-creation\",\r\n        \"issuetype\": {\r\n            \"name\": \"Task\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apitestleafmarch23.atlassian.net/rest/api/2/issue/",
+					"protocol": "https",
+					"host": [
+						"apitestleafmarch23",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchIssue",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://apitestleafmarch23.atlassian.net/rest/api/2/issue/{{jirakey}}",
+					"protocol": "https",
+					"host": [
+						"apitestleafmarch23",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						"{{jirakey}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditIssue",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ATATT3xFfGF0XoGxtDZ6fRqvTD1ROp-MX_PMZwf_yZZXJQLHN3bkYo00JmtZiBG1jgrUu--oGAH-k4Ux4dv291Xb8PcoUZjHDvhpN8cm-JZfaQ1b3TOHrzH3c18jUgEkZDjILPh-RMXUXTutQKGMlMSnjxuImi7euElYE3hWe7W5SPzaf_MEQOA=CBC50984",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "rajalakshmi.shivan@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fields\": {\r\n        \"description\": \"Checking if my PUT method changes the description\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apitestleafmarch23.atlassian.net/rest/api/2/issue/{{jirakey}}",
+					"protocol": "https",
+					"host": [
+						"apitestleafmarch23",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						"{{jirakey}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteIssue",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ATATT3xFfGF0XoGxtDZ6fRqvTD1ROp-MX_PMZwf_yZZXJQLHN3bkYo00JmtZiBG1jgrUu--oGAH-k4Ux4dv291Xb8PcoUZjHDvhpN8cm-JZfaQ1b3TOHrzH3c18jUgEkZDjILPh-RMXUXTutQKGMlMSnjxuImi7euElYE3hWe7W5SPzaf_MEQOA=CBC50984",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "rajalakshmi.shivan@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://apitestleafmarch23.atlassian.net/rest/api/2/issue/10000",
+					"protocol": "https",
+					"host": [
+						"apitestleafmarch23",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issue",
+						"10000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchProjectJQL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://apitestleafmarch23.atlassian.net/rest/api/2/search?jql=project=\"RS\"",
+					"protocol": "https",
+					"host": [
+						"apitestleafmarch23",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"search"
+					],
+					"query": [
+						{
+							"key": "jql",
+							"value": "project=\"RS\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListAllIssuestypes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://apitestleafmarch23.atlassian.net/rest/api/2/issuetype",
+					"protocol": "https",
+					"host": [
+						"apitestleafmarch23",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issuetype"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListSpeIssuetype",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://apitestleafmarch23.atlassian.net/rest/api/2/issuetype/10001",
+					"protocol": "https",
+					"host": [
+						"apitestleafmarch23",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issuetype",
+						"10001"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "ATATT3xFfGF0XoGxtDZ6fRqvTD1ROp-MX_PMZwf_yZZXJQLHN3bkYo00JmtZiBG1jgrUu--oGAH-k4Ux4dv291Xb8PcoUZjHDvhpN8cm-JZfaQ1b3TOHrzH3c18jUgEkZDjILPh-RMXUXTutQKGMlMSnjxuImi7euElYE3hWe7W5SPzaf_MEQOA=CBC50984",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "rajalakshmi.shivan@gmail.com",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "jirakey",
+			"value": "RS-3"
+		}
+	]
+}
